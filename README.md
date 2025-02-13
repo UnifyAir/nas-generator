@@ -1,6 +1,6 @@
-# NAS Message Handler
+# NAS Message Generator
 
-A Python-based NAS (Non-Access Stratum) message handler implementation, inspired by [Open5GS](https://github.com/open5gs/open5gs).
+A Python-based NAS (Non-Access Stratum) message generator implementation, inspired by [Open5GS](https://github.com/open5gs/open5gs).
 
 ## Overview
 
