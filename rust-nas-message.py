@@ -346,11 +346,12 @@ def create_tlv_config(ie: dict) -> str:
     }
 
     tag_b_fmt, len_b_fmt = byte_formats.get(fmt, (1, 1))
+    value_b_fmt = -1
 
     formats_with_IEI = {"T", "TV", "TLV", "TLV-E"}
     iei_present = (fmt in formats_with_IEI)
 
-    formats_with_length = {"TV", "LV", "TLV", "LV-E", "TLV-E"}
+    formats_with_length = {"V", "TV", "LV", "TLV", "LV-E", "TLV-E"}
     length_present = (fmt in formats_with_length)
 
     iei_str = ie.get("iei", "")
@@ -361,25 +362,41 @@ def create_tlv_config(ie: dict) -> str:
 
     length_str = ie.get("length", "")
     length_part = ""
+
     if length_present:
         try:
-            raw_length = int(length_str)
-            # Subtract T if IEI is present
-            if iei_present:
-                raw_length -= 1
-            # Subtract the length bytes themselves
-            raw_length -= len_b_fmt
+            if length_str == "1/2":
+                raw_length = 0
+                value_b_fmt = 0
+            else:
+                raw_length = int(length_str)
+                # Subtract T if IEI is present
+                if iei_present:
+                    raw_length -= 1
+                # Subtract the length bytes themselves
+                raw_length -= len_b_fmt
 
             length_part = f", length = {raw_length}"
         except ValueError:
             pass
 
+    # These are two exceptional cases for 1/2 V and 1/2 + 1/2 TV
+    value_byte_format = ""
+    if value_b_fmt == 0:
+        value_byte_format = f"value_bytes_format = {value_b_fmt}, "   
+
+
+    if "-" in tag_part:
+        tag_part = tag_part.replace('-', '')
+        tag_b_fmt = 0
+
     config = (
         f"#[tlv_config("
         f"{tag_part}"
-        f"tag_byte_format = {tag_b_fmt}"
+        f"tag_bytes_format = {tag_b_fmt}"
         f"{length_part}, "
-        f"length_byte_format = {len_b_fmt}, "
+        f"length_bytes_format = {len_b_fmt}, "
+        f"{value_byte_format}"
         f"format = \"{fmt}\""
         f")]"
     )
