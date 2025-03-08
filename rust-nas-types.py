@@ -122,8 +122,24 @@ def v_camel_case(v):
     capitalized_parts = [part.capitalize() for part in parts]
     return "".join(capitalized_parts)
 
-def get_value(v):
-    return re.sub('5gs_', '', re.sub('5g_', '', re.sub('5gsm', 'gsm', re.sub('5gmm', 'gmm', re.sub('\'', '_', re.sub('/', '_', re.sub('-', '_', re.sub(' ', '_', v)))).lower()))))
+def prefix_if_starts_with_digit(text: str) -> str:
+    if text and text[0].isdigit():
+        # Convert leading digit to English word
+        digit_words = {
+            '0': 'Zero',
+            '1': 'One',
+            '2': 'Two',
+            '3': 'Three',
+            '4': 'Four',
+            '5': 'Five',
+            '6': 'Six',
+            '7': 'Seven',
+            '8': 'Eight',
+            '9': 'Nine'
+        }
+        return digit_words[text[0]] + text[1:]
+    return text
+
 
 def length_to_type(length, format):
     try:
@@ -132,19 +148,21 @@ def length_to_type(length, format):
         if length == "1/2":
             return "(u8);"
         else:
-            return "(MSB0 [u8]);"
+            # return "(MSB0 [u8]);"
+            return "(Vec<u8>);"
 
     if format == "TLV" or format == "TLV-E":
         raw_length -= 2;
     if format == "LV" or format == "LV-E":
         raw_length -= 1;
-    if format == "TV" or format == "TV-E":
+    if (format == "TV" or format == "TV-E") and raw_length != 1:
         raw_length -= 1;
     
     if raw_length == 1:
         return "(u8);"
     else:
-        return "(MSB0 [u8]);"
+        # return "(MSB0 [u8]);"
+        return "(Vec<u8>);"
 
 def get_cells(cells):
     iei = cells[0].text
@@ -390,6 +408,13 @@ f = open(outdir + 'types.rs', 'w')
 output_header_to_file(f)
 
 
+f.write("""
+use bitfield::bitfield;
+use tlv::prelude::*;
+use tlv_derive::{TlvDecode, TlvEncode};
+use derive_more::{Into, From};
+"""
+)
 
 
 unique_types = set()
@@ -407,14 +432,24 @@ for (k, v) in sorted_msg_list:
         # f.write("\n#define OGS_NAS_5GS_%s_%s_TYPE 0x%s" % (v_upper(k), v_upper(ie["value"]), re.sub('-', '0', ie["iei"])))
 
     # f.write("\n\ntypedef struct ogs_nas_5gs_%s_s {\n" % v_lower(k))
+
+
+
+
+    # for ie in msg_list[k]["ies"]:
+    #     if v_camel_case(ie["type"]) not in unique_types:
+    #         unique_types.add(v_camel_case(ie["type"]))
+    #         f.write("bitfield! {\n")
+    #         f.write("   #[derive(Deref)]" + "\n")
+    #         f.write("   pub struct " + prefix_if_starts_with_digit(v_camel_case(ie["type"])) + length_to_type(ie["length"], ie["format"]) + "\n")
+    #         f.write("   impl Debug;" + "\n")
+    #         f.write("   u8;" + "\n")
+    #         f.write("}\n\n")
+
+
     for ie in msg_list[k]["ies"]:
         if v_camel_case(ie["type"]) not in unique_types:
             unique_types.add(v_camel_case(ie["type"]))
-            f.write("bitfield! {\n")
-            f.write("   #[derive(Deref)]" + "\n")
-            f.write("   pub struct " + prefix_if_starts_with_digit(v_camel_case(ie["type"])) + length_to_type(ie["length"], ie["format"]) + "\n")
-            f.write("   impl Debug;" + "\n")
-            f.write("   u8;" + "\n")
-            f.write("}\n\n")
-
+            f.write("\n\n#[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]\n")
+            f.write("pub struct " + prefix_if_starts_with_digit(v_camel_case(ie["type"])) + length_to_type(ie["length"], ie["format"]) + "\n")
 

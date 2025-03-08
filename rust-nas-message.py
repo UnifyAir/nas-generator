@@ -107,7 +107,20 @@ def usage():
 
 def prefix_if_starts_with_digit(text: str) -> str:
     if text and text[0].isdigit():
-        return "_" + text
+        # Convert leading digit to English word
+        digit_words = {
+            '0': 'Zero',
+            '1': 'One',
+            '2': 'Two',
+            '3': 'Three',
+            '4': 'Four',
+            '5': 'Five',
+            '6': 'Six',
+            '7': 'Seven',
+            '8': 'Eight',
+            '9': 'Nine'
+        }
+        return digit_words[text[0]] + text[1:]
     return text
 
 def v_upper(v):
@@ -129,10 +142,11 @@ def length_to_type(length, field_name, format):
     try:
         raw_length = int(length)
     except ValueError:
-        if length == "1/2":
-            return field_name
-        else:
-            return field_name + "<Vec<u8>>"
+        return field_name
+        # if length == "1/2":
+        #     return field_name
+        # else:
+        #     return field_name + "<Vec<u8>>"
 
     if format == "TLV" or format == "TLV-E":
         raw_length -= 2;
@@ -140,11 +154,12 @@ def length_to_type(length, field_name, format):
         raw_length -= 1;
     if format == "TV" or format == "TV-E":
         raw_length -= 1;
-    
-    if raw_length == 1:
-        return field_name
-    else:
-        return field_name + "<Vec<u8>>"
+
+    return field_name    
+    # if raw_length == 1:
+    #     return field_name
+    # else:
+    #     return field_name + "<Vec<u8>>"
 
 def get_cells(cells):
     iei = cells[0].text
@@ -406,6 +421,13 @@ def create_tlv_config(ie: dict) -> str:
 
 f = open(outdir + 'message.rs', 'w')
 output_header_to_file(f)
+
+f.write("""
+use tlv::prelude::*;
+use crate::types::*;
+use tlv_derive::{TlvDecode, TlvEncode};
+"""
+)
 
 f.write("""
 
