@@ -347,7 +347,6 @@ for (k, v) in sorted_msg_list:
 
 
 def create_tlv_config(ie: dict) -> str:
-    
     fmt = ie.get("format", "").upper()  # e.g. "TV", "LV-E", etc.
 
     byte_formats = {
@@ -369,20 +368,45 @@ def create_tlv_config(ie: dict) -> str:
     formats_with_length = {"V", "TV", "LV", "TLV", "LV-E", "TLV-E"}
     length_present = (fmt in formats_with_length)
 
+    # Build config parts as a list of strings, then join them at the end
+    config_parts = []
+
+    # Handle tag part
     iei_str = ie.get("iei", "")
-    tag_part = ""
     if iei_present:
+        if "-" in iei_str:
+            iei_str = iei_str.replace('-', '')
+            tag_b_fmt = 0
         iei_hex = f"0x{iei_str}"
-        tag_part = f"tag = {iei_hex}, "
+        config_parts.append(f"tag = {iei_hex}")
+    
+    # Always add tag_bytes_format
+    config_parts.append(f"tag_bytes_format = {tag_b_fmt}")
 
+    # Handle length part
     length_str = ie.get("length", "")
-    length_part = ""
-
     if length_present:
         try:
             if length_str == "1/2":
                 raw_length = 0
                 value_b_fmt = 0
+                config_parts.append(f"length = {raw_length}")
+            elif "-" in length_str:
+                parts = length_str.split("-")
+                min_length = int(parts[0])
+                
+                if iei_present:
+                    min_length -= 1
+                min_length -= len_b_fmt
+                
+                config_parts.append(f"min_length = {min_length}")
+                
+                if parts[1].lower() != "n":
+                    max_length = int(parts[1])
+                    if iei_present:
+                        max_length -= 1
+                    max_length -= len_b_fmt
+                    config_parts.append(f"max_length = {max_length}")
             else:
                 raw_length = int(length_str)
                 # Subtract T if IEI is present
@@ -390,32 +414,22 @@ def create_tlv_config(ie: dict) -> str:
                     raw_length -= 1
                 # Subtract the length bytes themselves
                 raw_length -= len_b_fmt
-
-            length_part = f", length = {raw_length}"
+                config_parts.append(f"length = {raw_length}")
         except ValueError:
             pass
 
-    # These are two exceptional cases for 1/2 V and 1/2 + 1/2 TV
-    value_byte_format = ""
+    # Always add length_bytes_format
+    config_parts.append(f"length_bytes_format = {len_b_fmt}")
+
+    # Add value_bytes_format if needed
     if value_b_fmt == 0:
-        value_byte_format = f"value_bytes_format = {value_b_fmt}, "   
+        config_parts.append(f"value_bytes_format = {value_b_fmt}")
 
+    # Always add format
+    config_parts.append(f"format = \"{fmt}\"")
 
-    if "-" in tag_part:
-        tag_part = tag_part.replace('-', '')
-        tag_b_fmt = 0
-
-    config = (
-        f"#[tlv_config("
-        f"{tag_part}"
-        f"tag_bytes_format = {tag_b_fmt}"
-        f"{length_part}, "
-        f"length_bytes_format = {len_b_fmt}, "
-        f"{value_byte_format}"
-        f"format = \"{fmt}\""
-        f")]"
-    )
-
+    # Join all parts with commas
+    config = "#[tlv_config(" + ", ".join(config_parts) + ")]"
     return config
 
 
