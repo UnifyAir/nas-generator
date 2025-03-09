@@ -450,6 +450,10 @@ for (k, v) in sorted_msg_list:
     for ie in msg_list[k]["ies"]:
         if v_camel_case(ie["type"]) not in unique_types:
             unique_types.add(v_camel_case(ie["type"]))
-            f.write("\n\n#[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]\n")
+            f.write("\n\n// ******************************************************************\n")
+            f.write("// "+ prefix_if_starts_with_digit(v_camel_case(ie["type"])) + "\n")
+            f.write("// ******************************************************************\n")
+            f.write("\n// Auto-generated\n")
+            f.write("#[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]\n")
             f.write("pub struct " + prefix_if_starts_with_digit(v_camel_case(ie["type"])) + length_to_type(ie["length"], ie["format"]) + "\n")
 
