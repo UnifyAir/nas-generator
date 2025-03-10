@@ -28,7 +28,7 @@
 /*******************************************************************************
  * This file had been created by rust-nas-message.py script v0.2.0
  * Please do not modify this file but regenerate it via script.
- * Created on: 2025-03-09 19:42:50.698547 by nr
+ * Created on: 2025-03-10 20:55:31.165618 by nr
  * from 24501-h90.docx
  ******************************************************************************/
 
@@ -76,12 +76,12 @@ pub struct MessageType(u8);
 
 
 // ******************************************************************
-// FivegsRegistrationType
+// FiveGsRegistrationType
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsRegistrationType(u8);
+pub struct FiveGsRegistrationType(u8);
 
 
 // ******************************************************************
@@ -94,21 +94,21 @@ pub struct KeySetIdentifier(u8);
 
 
 // ******************************************************************
-// FivegsMobileIdentity
+// FiveGsMobileIdentity
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsMobileIdentity(Vec<u8>);
+pub struct FiveGsMobileIdentity(Vec<u8>);
 
 
 // ******************************************************************
-// FivegmmCapability
+// FiveGmmCapability
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegmmCapability(Vec<u8>);
+pub struct FiveGmmCapability(Vec<u8>);
 
 
 // ******************************************************************
@@ -130,12 +130,12 @@ pub struct Nssai(Vec<u8>);
 
 
 // ******************************************************************
-// FivegsTrackingAreaIdentity
+// FiveGsTrackingAreaIdentity
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsTrackingAreaIdentity(Vec<u8>);
+pub struct FiveGsTrackingAreaIdentity(Vec<u8>);
 
 
 // ******************************************************************
@@ -202,12 +202,12 @@ pub struct UeUsageSetting(u8);
 
 
 // ******************************************************************
-// FivegsDrxParameters
+// FiveGsDrxParameters
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsDrxParameters(u8);
+pub struct FiveGsDrxParameters(u8);
 
 
 // ******************************************************************
@@ -256,12 +256,12 @@ pub struct NetworkSlicingIndication(u8);
 
 
 // ******************************************************************
-// FivegsUpdateType
+// FiveGsUpdateType
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsUpdateType(u8);
+pub struct FiveGsUpdateType(u8);
 
 
 // ******************************************************************
@@ -427,12 +427,12 @@ pub struct PeipsAssistanceInformation(Vec<u8>);
 
 
 // ******************************************************************
-// FivegsRegistrationResult
+// FiveGsRegistrationResult
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsRegistrationResult(u8);
+pub struct FiveGsRegistrationResult(u8);
 
 
 // ******************************************************************
@@ -445,12 +445,12 @@ pub struct PlmnList(Vec<u8>);
 
 
 // ******************************************************************
-// FivegsTrackingAreaIdentityList
+// FiveGsTrackingAreaIdentityList
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsTrackingAreaIdentityList(Vec<u8>);
+pub struct FiveGsTrackingAreaIdentityList(Vec<u8>);
 
 
 // ******************************************************************
@@ -463,12 +463,12 @@ pub struct RejectedNssai(Vec<u8>);
 
 
 // ******************************************************************
-// FivegsNetworkFeatureSupport
+// FiveGsNetworkFeatureSupport
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsNetworkFeatureSupport(Vec<u8>);
+pub struct FiveGsNetworkFeatureSupport(Vec<u8>);
 
 
 // ******************************************************************
@@ -625,12 +625,12 @@ pub struct ExtendedRejectedNssai(Vec<u8>);
 
 
 // ******************************************************************
-// FivegsAdditionalRequestResult
+// FiveGsAdditionalRequestResult
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsAdditionalRequestResult(u8);
+pub struct FiveGsAdditionalRequestResult(u8);
 
 
 // ******************************************************************
@@ -679,12 +679,12 @@ pub struct NsagInformation(Vec<u8>);
 
 
 // ******************************************************************
-// FivegmmCause
+// FiveGmmCause
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegmmCause(u8);
+pub struct FiveGmmCause(u8);
 
 
 // ******************************************************************
@@ -823,12 +823,12 @@ pub struct AuthenticationFailureParameter(Vec<u8>);
 
 
 // ******************************************************************
-// FivegsIdentityType
+// FiveGsIdentityType
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsIdentityType(u8);
+pub struct FiveGsIdentityType(u8);
 
 
 // ******************************************************************
@@ -994,12 +994,12 @@ pub struct SscMode(u8);
 
 
 // ******************************************************************
-// FivegsmCapability
+// FiveGsmCapability
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsmCapability(Vec<u8>);
+pub struct FiveGsmCapability(Vec<u8>);
 
 
 // ******************************************************************
@@ -1138,12 +1138,12 @@ pub struct SessionAmbr(Vec<u8>);
 
 
 // ******************************************************************
-// FivegsmCause
+// FiveGsmCause
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsmCause(u8);
+pub struct FiveGsmCause(u8);
 
 
 // ******************************************************************
@@ -1183,12 +1183,12 @@ pub struct QosFlowDescriptions(Vec<u8>);
 
 
 // ******************************************************************
-// FivegsmNetworkFeatureSupport
+// FiveGsmNetworkFeatureSupport
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsmNetworkFeatureSupport(Vec<u8>);
+pub struct FiveGsmNetworkFeatureSupport(Vec<u8>);
 
 
 // ******************************************************************
@@ -1237,12 +1237,12 @@ pub struct AllowedSscMode(u8);
 
 
 // ******************************************************************
-// FivegsmCongestionReAttemptIndicator
+// FiveGsmCongestionReAttemptIndicator
 // ******************************************************************
 
 // Auto-generated
 #[derive(Debug, TlvEncode, TlvDecode, Into, From, Clone)]
-pub struct FivegsmCongestionReAttemptIndicator(u8);
+pub struct FiveGsmCongestionReAttemptIndicator(u8);
 
 
 // ******************************************************************

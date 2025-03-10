@@ -120,8 +120,12 @@ def prefix_if_starts_with_digit(text: str) -> str:
             '8': 'Eight',
             '9': 'Nine'
         }
-        return digit_words[text[0]] + text[1:]
-    return text
+        # Capitalize the first letter after the digit
+        if len(text) > 1:
+            return digit_words[text[0]] + text[1].upper() + text[2:]
+        else:
+            return digit_words[text[0]]
+    return text    
 
 def v_upper(v):
     return re.sub('\'', '_', re.sub('/', '_', re.sub('-', '_', re.sub(' ', '_', v)))).upper()

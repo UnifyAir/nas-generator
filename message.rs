@@ -28,7 +28,7 @@
 /*******************************************************************************
  * This file had been created by rust-nas-message.py script v0.2.0
  * Please do not modify this file but regenerate it via script.
- * Created on: 2025-03-10 02:36:11.227784 by nr
+ * Created on: 2025-03-10 20:40:13.914658 by nr
  * from 24501-h90.docx
  ******************************************************************************/
 
@@ -107,13 +107,13 @@ pub struct NasRegistrationRequest {
     nas_registration_request_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 0, length_bytes_format = 0, value_bytes_format = 0, format = "V")]
-    nas_5gs_registration_type: FivegsRegistrationType,
+    nas_5gs_registration_type: FiveGsRegistrationType,
 
     #[tlv_config(tag_bytes_format = 0, length = 0, length_bytes_format = 0, value_bytes_format = 0, format = "V")]
     nas_ngksi: KeySetIdentifier,
 
     #[tlv_config(tag_bytes_format = 0, min_length = 4, length_bytes_format = 2, format = "LV-E")]
-    nas_5gs_mobile_identity: FivegsMobileIdentity,
+    nas_5gs_mobile_identity: FiveGsMobileIdentity,
 
 
     /* Optional fields */
@@ -121,7 +121,7 @@ pub struct NasRegistrationRequest {
     nas_non_current_native_nas_key_set_identifier: Option<KeySetIdentifier>,
 
     #[tlv_config(tag = 0x10, tag_bytes_format = 1, min_length = 1, max_length = 13, length_bytes_format = 1, format = "TLV")]
-    nas_5gmm_capability: Option<FivegmmCapability>,
+    nas_5gmm_capability: Option<FiveGmmCapability>,
 
     #[tlv_config(tag = 0x2E, tag_bytes_format = 1, min_length = 2, max_length = 8, length_bytes_format = 1, format = "TLV")]
     nas_ue_security_capability: Option<UeSecurityCapability>,
@@ -130,7 +130,7 @@ pub struct NasRegistrationRequest {
     nas_requested_nssai: Option<Nssai>,
 
     #[tlv_config(tag = 0x52, tag_bytes_format = 1, length = 6, length_bytes_format = 0, format = "TV")]
-    nas_last_visited_registered_tai: Option<FivegsTrackingAreaIdentity>,
+    nas_last_visited_registered_tai: Option<FiveGsTrackingAreaIdentity>,
 
     #[tlv_config(tag = 0x17, tag_bytes_format = 1, min_length = 2, max_length = 13, length_bytes_format = 1, format = "TLV")]
     nas_s1_ue_network_capability: Option<S1UeNetworkCapability>,
@@ -148,7 +148,7 @@ pub struct NasRegistrationRequest {
     nas_ue_status: Option<UeStatus>,
 
     #[tlv_config(tag = 0x77, tag_bytes_format = 1, length = 11, length_bytes_format = 2, format = "TLV-E")]
-    nas_additional_guti: Option<FivegsMobileIdentity>,
+    nas_additional_guti: Option<FiveGsMobileIdentity>,
 
     #[tlv_config(tag = 0x25, tag_bytes_format = 1, min_length = 2, max_length = 32, length_bytes_format = 1, format = "TLV")]
     nas_allowed_pdu_session_status: Option<AllowedPduSessionStatus>,
@@ -157,7 +157,7 @@ pub struct NasRegistrationRequest {
     nas_ue_usage_setting: Option<UeUsageSetting>,
 
     #[tlv_config(tag = 0x51, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_requested_drx_parameters: Option<FivegsDrxParameters>,
+    nas_requested_drx_parameters: Option<FiveGsDrxParameters>,
 
     #[tlv_config(tag = 0x70, tag_bytes_format = 1, min_length = 1, length_bytes_format = 2, format = "TLV-E")]
     nas_eps_nas_message_container: Option<EpsNasMessageContainer>,
@@ -175,7 +175,7 @@ pub struct NasRegistrationRequest {
     nas_network_slicing_indication: Option<NetworkSlicingIndication>,
 
     #[tlv_config(tag = 0x53, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_5gs_update_type: Option<FivegsUpdateType>,
+    nas_5gs_update_type: Option<FiveGsUpdateType>,
 
     #[tlv_config(tag = 0x41, tag_bytes_format = 1, length = 3, length_bytes_format = 1, format = "TLV")]
     nas_mobile_station_classmark_2: Option<MobileStationClassmark2>,
@@ -257,18 +257,18 @@ pub struct NasRegistrationAccept {
     nas_registration_accept_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 1, format = "LV")]
-    nas_5gs_registration_result: FivegsRegistrationResult,
+    nas_5gs_registration_result: FiveGsRegistrationResult,
 
 
     /* Optional fields */
     #[tlv_config(tag = 0x77, tag_bytes_format = 1, length = 11, length_bytes_format = 2, format = "TLV-E")]
-    nas_5g_guti: Option<FivegsMobileIdentity>,
+    nas_5g_guti: Option<FiveGsMobileIdentity>,
 
     #[tlv_config(tag = 0x4A, tag_bytes_format = 1, min_length = 3, max_length = 45, length_bytes_format = 1, format = "TLV")]
     nas_equivalent_plmns: Option<PlmnList>,
 
     #[tlv_config(tag = 0x54, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_tai_list: Option<FivegsTrackingAreaIdentityList>,
+    nas_tai_list: Option<FiveGsTrackingAreaIdentityList>,
 
     #[tlv_config(tag = 0x15, tag_bytes_format = 1, min_length = 2, max_length = 72, length_bytes_format = 1, format = "TLV")]
     nas_allowed_nssai: Option<Nssai>,
@@ -280,7 +280,7 @@ pub struct NasRegistrationAccept {
     nas_configured_nssai: Option<Nssai>,
 
     #[tlv_config(tag = 0x21, tag_bytes_format = 1, min_length = 1, max_length = 3, length_bytes_format = 1, format = "TLV")]
-    nas_5gs_network_feature_support: Option<FivegsNetworkFeatureSupport>,
+    nas_5gs_network_feature_support: Option<FiveGsNetworkFeatureSupport>,
 
     #[tlv_config(tag = 0x50, tag_bytes_format = 1, min_length = 2, max_length = 32, length_bytes_format = 1, format = "TLV")]
     nas_pdu_session_status: Option<PduSessionStatus>,
@@ -331,7 +331,7 @@ pub struct NasRegistrationAccept {
     nas_operator_defined_access_category_definitions: Option<OperatorDefinedAccessCategoryDefinitions>,
 
     #[tlv_config(tag = 0x51, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_negotiated_drx_parameters: Option<FivegsDrxParameters>,
+    nas_negotiated_drx_parameters: Option<FiveGsDrxParameters>,
 
     #[tlv_config(tag = 0xD, tag_bytes_format = 0, length = 0, length_bytes_format = 0, format = "TV")]
     nas_non_3gpp_nw_policies: Option<Non3gppNwProvidedPolicies>,
@@ -385,7 +385,7 @@ pub struct NasRegistrationAccept {
     nas_negotiated_peips_assistance_information: Option<PeipsAssistanceInformation>,
 
     #[tlv_config(tag = 0x34, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_5gs_additional_request_result: Option<FivegsAdditionalRequestResult>,
+    nas_5gs_additional_request_result: Option<FiveGsAdditionalRequestResult>,
 
     #[tlv_config(tag = 0x70, tag_bytes_format = 1, min_length = 4, max_length = 4096, length_bytes_format = 2, format = "TLV-E")]
     nas_nssrg_information: Option<NssrgInformation>,
@@ -400,10 +400,10 @@ pub struct NasRegistrationAccept {
     nas_list_of_plmns_to_be_used_in_disaster_condition: Option<ListOfPlmnsToBeUsedInDisasterCondition>,
 
     #[tlv_config(tag = 0x1D, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FiveGsTrackingAreaIdentityList>,
 
     #[tlv_config(tag = 0x1E, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FiveGsTrackingAreaIdentityList>,
 
     #[tlv_config(tag = 0x71, tag_bytes_format = 1, min_length = 0, length_bytes_format = 2, format = "TLV-E")]
     nas_extended_cag_information_list: Option<ExtendedCagInformationList>,
@@ -461,7 +461,7 @@ pub struct NasRegistrationReject {
     nas_registration_reject_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gmm_cause: FivegmmCause,
+    nas_5gmm_cause: FiveGmmCause,
 
 
     /* Optional fields */
@@ -493,10 +493,10 @@ pub struct NasRegistrationReject {
     nas_lower_bound_timer_value: Option<GprsTimer3>,
 
     #[tlv_config(tag = 0x1D, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FiveGsTrackingAreaIdentityList>,
 
     #[tlv_config(tag = 0x1E, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FiveGsTrackingAreaIdentityList>,
 
 } 
 
@@ -527,7 +527,7 @@ pub struct NasDeregistrationRequestFromUe {
     nas_ngksi: KeySetIdentifier,
 
     #[tlv_config(tag_bytes_format = 0, min_length = 4, length_bytes_format = 2, format = "LV-E")]
-    nas_5gs_mobile_identity: FivegsMobileIdentity,
+    nas_5gs_mobile_identity: FiveGsMobileIdentity,
 
 } 
 
@@ -582,7 +582,7 @@ pub struct NasDeregistrationRequestToUe {
 
     /* Optional fields */
     #[tlv_config(tag = 0x58, tag_bytes_format = 1, length = 1, length_bytes_format = 0, format = "TV")]
-    nas_5gmm_cause: Option<FivegmmCause>,
+    nas_5gmm_cause: Option<FiveGmmCause>,
 
     #[tlv_config(tag = 0x5F, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
     nas_t3346_value: Option<GprsTimer2>,
@@ -606,10 +606,10 @@ pub struct NasDeregistrationRequestToUe {
     nas_lower_bound_timer_value: Option<GprsTimer3>,
 
     #[tlv_config(tag = 0x1D, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FiveGsTrackingAreaIdentityList>,
 
     #[tlv_config(tag = 0x1E, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FiveGsTrackingAreaIdentityList>,
 
 } 
 
@@ -662,7 +662,7 @@ pub struct NasServiceRequest {
     nas_service_type: ServiceType,
 
     #[tlv_config(tag_bytes_format = 0, length = 7, length_bytes_format = 2, format = "LV-E")]
-    nas_5g_s_tmsi: FivegsMobileIdentity,
+    nas_5g_s_tmsi: FiveGsMobileIdentity,
 
 
     /* Optional fields */
@@ -707,7 +707,7 @@ pub struct NasServiceReject {
     nas_service_reject_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gmm_cause: FivegmmCause,
+    nas_5gmm_cause: FiveGmmCause,
 
 
     /* Optional fields */
@@ -736,10 +736,10 @@ pub struct NasServiceReject {
     nas_lower_bound_timer_value: Option<GprsTimer3>,
 
     #[tlv_config(tag = 0x1D, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FiveGsTrackingAreaIdentityList>,
 
     #[tlv_config(tag = 0x1E, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FiveGsTrackingAreaIdentityList>,
 
 } 
 
@@ -781,13 +781,13 @@ pub struct NasServiceAccept {
     nas_t3448_value: Option<GprsTimer2>,
 
     #[tlv_config(tag = 0x34, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_5gs_additional_request_result: Option<FivegsAdditionalRequestResult>,
+    nas_5gs_additional_request_result: Option<FiveGsAdditionalRequestResult>,
 
     #[tlv_config(tag = 0x1D, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_for_roaming: Option<FiveGsTrackingAreaIdentityList>,
 
     #[tlv_config(tag = 0x1E, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FivegsTrackingAreaIdentityList>,
+    nas_forbidden_tai_for_the_list_of_5gs_forbidden_tracking_areas_forregional_provision_of_service: Option<FiveGsTrackingAreaIdentityList>,
 
 } 
 
@@ -817,10 +817,10 @@ pub struct NasConfigurationUpdateCommand {
     nas_configuration_update_indication: Option<ConfigurationUpdateIndication>,
 
     #[tlv_config(tag = 0x77, tag_bytes_format = 1, length = 11, length_bytes_format = 2, format = "TLV-E")]
-    nas_5g_guti: Option<FivegsMobileIdentity>,
+    nas_5g_guti: Option<FiveGsMobileIdentity>,
 
     #[tlv_config(tag = 0x54, tag_bytes_format = 1, min_length = 7, max_length = 112, length_bytes_format = 1, format = "TLV")]
-    nas_tai_list: Option<FivegsTrackingAreaIdentityList>,
+    nas_tai_list: Option<FiveGsTrackingAreaIdentityList>,
 
     #[tlv_config(tag = 0x15, tag_bytes_format = 1, min_length = 2, max_length = 72, length_bytes_format = 1, format = "TLV")]
     nas_allowed_nssai: Option<Nssai>,
@@ -877,7 +877,7 @@ pub struct NasConfigurationUpdateCommand {
     nas_ue_radio_capability_id_deletion_indication: Option<UeRadioCapabilityIdDeletionIndication>,
 
     #[tlv_config(tag = 0x44, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_5gs_registration_result: Option<FivegsRegistrationResult>,
+    nas_5gs_registration_result: Option<FiveGsRegistrationResult>,
 
     #[tlv_config(tag = 0x1B, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
     nas_truncated_5g_s_tmsi_configuration: Option<Truncated5gSTmsiConfiguration>,
@@ -1059,7 +1059,7 @@ pub struct NasAuthenticationFailure {
     nas_authentication_failure_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gmm_cause: FivegmmCause,
+    nas_5gmm_cause: FiveGmmCause,
 
 
     /* Optional fields */
@@ -1125,7 +1125,7 @@ pub struct NasIdentityRequest {
     nas_identity_request_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 0, length_bytes_format = 0, value_bytes_format = 0, format = "V")]
-    nas_identity_type: FivegsIdentityType,
+    nas_identity_type: FiveGsIdentityType,
 
     #[tlv_config(tag_bytes_format = 0, length = 0, length_bytes_format = 0, value_bytes_format = 0, format = "V")]
     nas_spare_half_octet_1: SpareHalfOctet,
@@ -1153,7 +1153,7 @@ pub struct NasIdentityResponse {
     nas_identity_response_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, min_length = 1, length_bytes_format = 2, format = "LV-E")]
-    nas_mobile_identity: FivegsMobileIdentity,
+    nas_mobile_identity: FiveGsMobileIdentity,
 
 } 
 
@@ -1234,13 +1234,13 @@ pub struct NasSecurityModeComplete {
 
     /* Optional fields */
     #[tlv_config(tag = 0x77, tag_bytes_format = 1, length = 9, length_bytes_format = 2, format = "TLV-E")]
-    nas_imeisv: Option<FivegsMobileIdentity>,
+    nas_imeisv: Option<FiveGsMobileIdentity>,
 
     #[tlv_config(tag = 0x71, tag_bytes_format = 1, min_length = 1, length_bytes_format = 2, format = "TLV-E")]
     nas_nas_message_container: Option<MessageContainer>,
 
     #[tlv_config(tag = 0x78, tag_bytes_format = 1, min_length = 4, length_bytes_format = 2, format = "TLV-E")]
-    nas_non_imeisv_pei: Option<FivegsMobileIdentity>,
+    nas_non_imeisv_pei: Option<FiveGsMobileIdentity>,
 
 } 
 
@@ -1265,7 +1265,7 @@ pub struct NasSecurityModeReject {
     nas_security_mode_reject_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gmm_cause: FivegmmCause,
+    nas_5gmm_cause: FiveGmmCause,
 
 } 
 
@@ -1290,7 +1290,7 @@ pub struct Nas5gmmStatus {
     nas_5gmm_status_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gmm_cause: FivegmmCause,
+    nas_5gmm_cause: FiveGmmCause,
 
 } 
 
@@ -1444,7 +1444,7 @@ pub struct NasDlNasTransport {
     nas_additional_information: Option<AdditionalInformation>,
 
     #[tlv_config(tag = 0x58, tag_bytes_format = 1, length = 1, length_bytes_format = 0, format = "TV")]
-    nas_5gmm_cause: Option<FivegmmCause>,
+    nas_5gmm_cause: Option<FiveGmmCause>,
 
     #[tlv_config(tag = 0x37, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
     nas_back_off_timer_value: Option<GprsTimer3>,
@@ -1486,7 +1486,7 @@ pub struct NasPduSessionEstablishmentRequest {
     nas_ssc_mode: Option<SscMode>,
 
     #[tlv_config(tag = 0x28, tag_bytes_format = 1, min_length = 1, max_length = 13, length_bytes_format = 1, format = "TLV")]
-    nas_5gsm_capability: Option<FivegsmCapability>,
+    nas_5gsm_capability: Option<FiveGsmCapability>,
 
     #[tlv_config(tag = 0x55, tag_bytes_format = 1, length = 2, length_bytes_format = 0, format = "TV")]
     nas_maximum_number_of_supported_packet_filters: Option<MaximumNumberOfSupportedPacketFilters>,
@@ -1567,7 +1567,7 @@ pub struct NasPduSessionEstablishmentAccept {
 
     /* Optional fields */
     #[tlv_config(tag = 0x59, tag_bytes_format = 1, length = 1, length_bytes_format = 0, format = "TV")]
-    nas_5gsm_cause: Option<FivegsmCause>,
+    nas_5gsm_cause: Option<FiveGsmCause>,
 
     #[tlv_config(tag = 0x29, tag_bytes_format = 1, min_length = 5, max_length = 29, length_bytes_format = 1, format = "TLV")]
     nas_pdu_address: Option<PduAddress>,
@@ -1597,7 +1597,7 @@ pub struct NasPduSessionEstablishmentAccept {
     nas_dnn: Option<Dnn>,
 
     #[tlv_config(tag = 0x17, tag_bytes_format = 1, min_length = 1, max_length = 13, length_bytes_format = 1, format = "TLV")]
-    nas_5gsm_network_feature_support: Option<FivegsmNetworkFeatureSupport>,
+    nas_5gsm_network_feature_support: Option<FiveGsmNetworkFeatureSupport>,
 
     #[tlv_config(tag = 0x18, tag_bytes_format = 1, length = 2, length_bytes_format = 1, format = "TLV")]
     nas_serving_plmn_rate_control: Option<ServingPlmnRateControl>,
@@ -1643,7 +1643,7 @@ pub struct NasPduSessionEstablishmentReject {
     nas_pdu_session_establishment_reject_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gsm_cause: FivegsmCause,
+    nas_5gsm_cause: FiveGsmCause,
 
 
     /* Optional fields */
@@ -1657,7 +1657,7 @@ pub struct NasPduSessionEstablishmentReject {
     nas_eap_message: Option<EapMessage>,
 
     #[tlv_config(tag = 0x61, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_5gsm_congestion_re_attempt_indicator: Option<FivegsmCongestionReAttemptIndicator>,
+    nas_5gsm_congestion_re_attempt_indicator: Option<FiveGsmCongestionReAttemptIndicator>,
 
     #[tlv_config(tag = 0x7B, tag_bytes_format = 1, min_length = 1, max_length = 65535, length_bytes_format = 2, format = "TLV-E")]
     nas_extended_protocol_configuration_options: Option<ExtendedProtocolConfigurationOptions>,
@@ -1783,10 +1783,10 @@ pub struct NasPduSessionModificationRequest {
 
     /* Optional fields */
     #[tlv_config(tag = 0x28, tag_bytes_format = 1, min_length = 1, max_length = 13, length_bytes_format = 1, format = "TLV")]
-    nas_5gsm_capability: Option<FivegsmCapability>,
+    nas_5gsm_capability: Option<FiveGsmCapability>,
 
     #[tlv_config(tag = 0x59, tag_bytes_format = 1, length = 1, length_bytes_format = 0, format = "TV")]
-    nas_5gsm_cause: Option<FivegsmCause>,
+    nas_5gsm_cause: Option<FiveGsmCause>,
 
     #[tlv_config(tag = 0x55, tag_bytes_format = 1, length = 2, length_bytes_format = 0, format = "TV")]
     nas_maximum_number_of_supported_packet_filters: Option<MaximumNumberOfSupportedPacketFilters>,
@@ -1847,7 +1847,7 @@ pub struct NasPduSessionModificationReject {
     nas_pdu_session_modification_reject_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gsm_cause: FivegsmCause,
+    nas_5gsm_cause: FiveGsmCause,
 
 
     /* Optional fields */
@@ -1855,7 +1855,7 @@ pub struct NasPduSessionModificationReject {
     nas_back_off_timer_value: Option<GprsTimer3>,
 
     #[tlv_config(tag = 0x61, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_5gsm_congestion_re_attempt_indicator: Option<FivegsmCongestionReAttemptIndicator>,
+    nas_5gsm_congestion_re_attempt_indicator: Option<FiveGsmCongestionReAttemptIndicator>,
 
     #[tlv_config(tag = 0x7B, tag_bytes_format = 1, min_length = 1, max_length = 65535, length_bytes_format = 2, format = "TLV-E")]
     nas_extended_protocol_configuration_options: Option<ExtendedProtocolConfigurationOptions>,
@@ -1888,7 +1888,7 @@ pub struct NasPduSessionModificationCommand {
 
     /* Optional fields */
     #[tlv_config(tag = 0x59, tag_bytes_format = 1, length = 1, length_bytes_format = 0, format = "TV")]
-    nas_5gsm_cause: Option<FivegsmCause>,
+    nas_5gsm_cause: Option<FiveGsmCause>,
 
     #[tlv_config(tag = 0x2A, tag_bytes_format = 1, length = 6, length_bytes_format = 1, format = "TLV")]
     nas_session_ambr: Option<SessionAmbr>,
@@ -1985,7 +1985,7 @@ pub struct NasPduSessionModificationCommandReject {
     nas_pdu_session_modification_command_reject_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gsm_cause: FivegsmCause,
+    nas_5gsm_cause: FiveGsmCause,
 
 
     /* Optional fields */
@@ -2017,7 +2017,7 @@ pub struct NasPduSessionReleaseRequest {
 
     /* Optional fields */
     #[tlv_config(tag = 0x59, tag_bytes_format = 1, length = 1, length_bytes_format = 0, format = "TV")]
-    nas_5gsm_cause: Option<FivegsmCause>,
+    nas_5gsm_cause: Option<FiveGsmCause>,
 
     #[tlv_config(tag = 0x7B, tag_bytes_format = 1, min_length = 1, max_length = 65535, length_bytes_format = 2, format = "TLV-E")]
     nas_extended_protocol_configuration_options: Option<ExtendedProtocolConfigurationOptions>,
@@ -2045,7 +2045,7 @@ pub struct NasPduSessionReleaseReject {
     nas_pdu_session_release_reject_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gsm_cause: FivegsmCause,
+    nas_5gsm_cause: FiveGsmCause,
 
 
     /* Optional fields */
@@ -2075,7 +2075,7 @@ pub struct NasPduSessionReleaseCommand {
     nas_pdu_session_release_command_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gsm_cause: FivegsmCause,
+    nas_5gsm_cause: FiveGsmCause,
 
 
     /* Optional fields */
@@ -2086,7 +2086,7 @@ pub struct NasPduSessionReleaseCommand {
     nas_eap_message: Option<EapMessage>,
 
     #[tlv_config(tag = 0x61, tag_bytes_format = 1, length = 1, length_bytes_format = 1, format = "TLV")]
-    nas_5gsm_congestion_re_attempt_indicator: Option<FivegsmCongestionReAttemptIndicator>,
+    nas_5gsm_congestion_re_attempt_indicator: Option<FiveGsmCongestionReAttemptIndicator>,
 
     #[tlv_config(tag = 0x7B, tag_bytes_format = 1, min_length = 1, max_length = 65535, length_bytes_format = 2, format = "TLV-E")]
     nas_extended_protocol_configuration_options: Option<ExtendedProtocolConfigurationOptions>,
@@ -2122,7 +2122,7 @@ pub struct NasPduSessionReleaseComplete {
 
     /* Optional fields */
     #[tlv_config(tag = 0x59, tag_bytes_format = 1, length = 1, length_bytes_format = 0, format = "TV")]
-    nas_5gsm_cause: Option<FivegsmCause>,
+    nas_5gsm_cause: Option<FiveGsmCause>,
 
     #[tlv_config(tag = 0x7B, tag_bytes_format = 1, min_length = 1, max_length = 65535, length_bytes_format = 2, format = "TLV-E")]
     nas_extended_protocol_configuration_options: Option<ExtendedProtocolConfigurationOptions>,
@@ -2150,7 +2150,7 @@ pub struct Nas5gsmStatus {
     nas_5gsm_status_message_identity: MessageType,
 
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
-    nas_5gsm_cause: FivegsmCause,
+    nas_5gsm_cause: FiveGsmCause,
 
 } 
 
