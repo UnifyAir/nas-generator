@@ -507,10 +507,10 @@ for (k, v) in sorted_msg_list:
 
         if ie["presence"] == "M":
             f.write("    " + create_tlv_config(ie) + "\n")
-            f.write(f"    nas_{value}: {length_to_type(ie['length'], prefix_if_starts_with_digit(v_camel_case(ie['type'])), ie['format'])},\n\n")
+            f.write(f"    pub nas_{value}: {length_to_type(ie['length'], prefix_if_starts_with_digit(v_camel_case(ie['type'])), ie['format'])},\n\n")
 
         if ie["presence"] != "M":
             f.write("    " + create_tlv_config(ie) + "\n")
-            f.write(f"    nas_{value}: Option<{length_to_type(ie['length'], prefix_if_starts_with_digit(v_camel_case(ie['type'])), ie['format'])}>,\n\n")
+            f.write(f"    pub nas_{value}: Option<{length_to_type(ie['length'], prefix_if_starts_with_digit(v_camel_case(ie['type'])), ie['format'])}>,\n\n")
 
     f.write("} \n\n")
