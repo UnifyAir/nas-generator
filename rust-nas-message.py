@@ -481,7 +481,7 @@ for (k, v) in sorted_msg_list:
 
     # f.write("\n\ntypedef struct ogs_nas_5gs_%s_s {\n" % v_lower(k))
     
-    f.write("\n\n#[derive(Debug, TlvEncode, TlvDecode)]\n")
+    f.write("\n\n#[derive(Debug, TlvEncode, TlvDecode, Clone)]\n")
     f.write("pub struct Nas%s {\n" % v_camel_case(k))
 
     mandatory_fields = False
