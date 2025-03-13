@@ -444,6 +444,7 @@ f.write("""
 use tlv::prelude::*;
 use crate::types::*;
 use tlv_derive::{TlvDecode, TlvEncode};
+use auto_new_builder::auto_new_builder_derive::AutoNewBuilder;
 """
 )
 
@@ -481,7 +482,7 @@ for (k, v) in sorted_msg_list:
 
     # f.write("\n\ntypedef struct ogs_nas_5gs_%s_s {\n" % v_lower(k))
     
-    f.write("\n\n#[derive(Debug, TlvEncode, TlvDecode, Clone)]\n")
+    f.write("\n\n#[derive(Debug, TlvEncode, TlvDecode, Clone, AutoNewBuilder)]\n")
     f.write("pub struct Nas%s {\n" % v_camel_case(k))
 
     mandatory_fields = False
