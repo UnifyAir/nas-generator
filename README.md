@@ -1,19 +1,26 @@
-# NAS Message Generator
+# NAS Message Generator 🚀
+![README: AI Generated](https://img.shields.io/badge/README-AI%20Generated-blue.svg)
 
 A Python-based NAS (Non-Access Stratum) message generator implementation, inspired by [Open5GS](https://github.com/open5gs/open5gs).
 
-## Overview
+## Installation
 
-This project provides tools for handling NAS messages in 5G/LTE networks. It includes Python implementations for NAS message parsing and processing.
+```bash
+pip install python-docx
+```
 
-## Features
+## Usage
 
-- NAS message parsing and encoding
-- Support for 5G NAS message types
-- Python-based implementation with Rust bindings
+Run the NAS message generator:
 
-## Project Structure
+```bash
+python rust-nas-message.py
+```
 
-.
-├── nas-message.py        # Main entry point
-├── rust-nas 
+## Acknowledgments
+
+- [Open5GS](https://github.com/open5gs/open5gs) - This project draws significant inspiration from the Open5GS implementation of NAS message generation. We're grateful to the Open5GS team for their excellent work in the open-source 5G core network space.
+
+## Support
+
+If you have any questions or run into issues, please open an issue in the GitHub repository.
