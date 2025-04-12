@@ -210,6 +210,53 @@ msg_list["PDU SESSION RELEASE COMMAND"] = { "type" : "211" }
 msg_list["PDU SESSION RELEASE COMPLETE"] = { "type" : "212" }
 msg_list["5GSM STATUS"] = { "type" : "214" }
 
+# Payload type for message list
+msg_list["REGISTRATION REQUEST"]["payload_type"] = "gmm"
+msg_list["REGISTRATION ACCEPT"]["payload_type"] = "gmm"
+msg_list["REGISTRATION COMPLETE"]["payload_type"] = "gmm"
+msg_list["REGISTRATION REJECT"]["payload_type"] = "gmm"
+msg_list["DEREGISTRATION REQUEST FROM UE"]["payload_type"] = "gmm"
+msg_list["DEREGISTRATION ACCEPT FROM UE"]["payload_type"] = "gmm"
+msg_list["DEREGISTRATION REQUEST TO UE"]["payload_type"] = "gmm"
+msg_list["DEREGISTRATION ACCEPT TO UE"]["payload_type"] = "gmm"
+msg_list["SERVICE REQUEST"]["payload_type"] = "gmm"
+msg_list["SERVICE REJECT"]["payload_type"] = "gmm"
+msg_list["SERVICE ACCEPT"]["payload_type"] = "gmm"
+msg_list["CONFIGURATION UPDATE COMMAND"]["payload_type"] = "gmm"
+msg_list["CONFIGURATION UPDATE COMPLETE"]["payload_type"] = "gmm"
+msg_list["AUTHENTICATION REQUEST"]["payload_type"] = "gmm"
+msg_list["AUTHENTICATION RESPONSE"]["payload_type"] = "gmm"
+msg_list["AUTHENTICATION REJECT"]["payload_type"] = "gmm"
+msg_list["AUTHENTICATION FAILURE"]["payload_type"] = "gmm"
+msg_list["AUTHENTICATION RESULT"]["payload_type"] = "gmm"
+msg_list["IDENTITY REQUEST"]["payload_type"] = "gmm"
+msg_list["IDENTITY RESPONSE"]["payload_type"] = "gmm"
+msg_list["SECURITY MODE COMMAND"]["payload_type"] = "gmm"
+msg_list["SECURITY MODE COMPLETE"]["payload_type"] = "gmm"
+msg_list["SECURITY MODE REJECT"]["payload_type"] = "gmm"
+msg_list["5GMM STATUS"]["payload_type"] = "gmm"
+msg_list["NOTIFICATION"]["payload_type"] = "gmm"
+msg_list["NOTIFICATION RESPONSE"]["payload_type"] = "gmm"
+msg_list["UL NAS TRANSPORT"]["payload_type"] = "gmm"
+msg_list["DL NAS TRANSPORT"]["payload_type"] = "gmm"
+
+msg_list["PDU SESSION ESTABLISHMENT REQUEST"]["payload_type"] = "gsm"
+msg_list["PDU SESSION ESTABLISHMENT ACCEPT"]["payload_type"] = "gsm"
+msg_list["PDU SESSION ESTABLISHMENT REJECT"]["payload_type"] = "gsm"
+msg_list["PDU SESSION AUTHENTICATION COMMAND"]["payload_type"] = "gsm"
+msg_list["PDU SESSION AUTHENTICATION COMPLETE"]["payload_type"] = "gsm"
+msg_list["PDU SESSION AUTHENTICATION RESULT"]["payload_type"] = "gsm"
+msg_list["PDU SESSION MODIFICATION REQUEST"]["payload_type"] = "gsm"
+msg_list["PDU SESSION MODIFICATION REJECT"]["payload_type"] = "gsm"
+msg_list["PDU SESSION MODIFICATION COMMAND"]["payload_type"] = "gsm"
+msg_list["PDU SESSION MODIFICATION COMPLETE"]["payload_type"] = "gsm"
+msg_list["PDU SESSION MODIFICATION COMMAND REJECT"]["payload_type"] = "gsm"
+msg_list["PDU SESSION RELEASE REQUEST"]["payload_type"] = "gsm"
+msg_list["PDU SESSION RELEASE REJECT"]["payload_type"] = "gsm"
+msg_list["PDU SESSION RELEASE COMMAND"]["payload_type"] = "gsm"
+msg_list["PDU SESSION RELEASE COMPLETE"]["payload_type"] = "gsm"
+msg_list["5GSM STATUS"]["payload_type"] = "gsm"
+
 # Table number for Message List
 msg_list["AUTHENTICATION REQUEST"]["table"] = 0
 msg_list["AUTHENTICATION RESPONSE"]["table"] = 1
@@ -384,6 +431,9 @@ def create_tlv_config(ie: dict) -> str:
     config = "#[tlv_config(" + ", ".join(config_parts) + ")]"
     return config
 
+def create_auto_new_value(value) -> str:
+    auto_new_value = f"#[auto_new_value = \"{value}\"]"
+    return auto_new_value
 
 f = open(outdir + 'message.rs', 'w')
 output_header_to_file(f)
@@ -455,6 +505,16 @@ for (k, v) in sorted_msg_list:
             value_count[value] = 0
 
         if ie["presence"] == "M":
+            if v_camel_case(ie['type']) == "ExtendedProtocolDiscriminator":
+                if msg_list[k]["payload_type"] == "gmm":
+                    f.write("    " + create_auto_new_value("ExtendedProtocolDiscriminator::gmm()") + "\n")
+                elif msg_list[k]["payload_type"] == "gsm":
+                    f.write("    " + create_auto_new_value("ExtendedProtocolDiscriminator::gsm()") + "\n")
+            elif v_camel_case(ie['type']) == "SpareHalfOctet":
+                f.write("    " + create_auto_new_value("SpareHalfOctet::zero()") + "\n")
+            elif v_camel_case(ie['type']) == "MessageType":
+                f.write("    " + create_auto_new_value("MessageType::" + v_lower(k) + "()") + "\n")
+
             f.write("    " + create_tlv_config(ie) + "\n")
             f.write(f"    pub nas_{value}: {length_to_type(ie['length'], prefix_if_starts_with_digit(v_camel_case(ie['type'])), ie['format'])},\n\n")
 
