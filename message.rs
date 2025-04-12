@@ -1,7 +1,7 @@
 /*******************************************************************************
  * This file had been created by rust-nas-message.py script v0.2.0
  * Please do not modify this file but regenerate it via script.
- * Created on: 2025-04-12 14:28:31.229906 by nr
+ * Created on: 2025-04-12 14:49:27.187832 by nr
  * from 24501-h90.docx
  ******************************************************************************/
 
@@ -1336,7 +1336,7 @@ pub struct Nas5gmmStatus {
     #[tlv_config(tag_bytes_format = 0, length = 0, length_bytes_format = 0, value_bytes_format = 0, format = "V")]
     pub nas_spare_half_octet: SpareHalfOctet,
 
-    #[auto_new_value = "MessageType::5gmm_status()"]
+    #[auto_new_value = "MessageType::gmm_status()"]
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
     pub nas_5gmm_status_message_identity: MessageType,
 
@@ -2243,7 +2243,7 @@ pub struct Nas5gsmStatus {
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
     pub nas_pti: ProcedureTransactionIdentity,
 
-    #[auto_new_value = "MessageType::5gsm_status()"]
+    #[auto_new_value = "MessageType::gsm_status()"]
     #[tlv_config(tag_bytes_format = 0, length = 1, length_bytes_format = 0, format = "V")]
     pub nas_5gsm_status_message_identity: MessageType,
 

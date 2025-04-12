@@ -513,7 +513,7 @@ for (k, v) in sorted_msg_list:
             elif v_camel_case(ie['type']) == "SpareHalfOctet":
                 f.write("    " + create_auto_new_value("SpareHalfOctet::zero()") + "\n")
             elif v_camel_case(ie['type']) == "MessageType":
-                f.write("    " + create_auto_new_value("MessageType::" + v_lower(k) + "()") + "\n")
+                f.write("    " + create_auto_new_value("MessageType::" + re.sub(r'^\d+', '', v_lower(k)) + "()") + "\n")
 
             f.write("    " + create_tlv_config(ie) + "\n")
             f.write(f"    pub nas_{value}: {length_to_type(ie['length'], prefix_if_starts_with_digit(v_camel_case(ie['type'])), ie['format'])},\n\n")
